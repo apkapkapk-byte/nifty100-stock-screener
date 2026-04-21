@@ -51,3 +51,9 @@ python screener.py
 * Backtesting engine
 * Portfolio optimization
 * Strategy automation
+
+## Bugs
+
+* Passes unfit stocks to filtered list due to inadequate data availability of those stocks
+* Analyses 93 out of 100 stocks with some errors and blank values, again due to data unavailability
+* limitations due to data source-yahoo finance 
