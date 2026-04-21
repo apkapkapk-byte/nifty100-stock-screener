@@ -1,0 +1,81 @@
+# ═══════════════════════════════════════════════════════════════
+#  NIFTY 200 SCREENER — CONFIG FILE
+#  Edit values below, save, then run screener.py
+#  To disable any filter: add a # at the start of that line
+#  To enable any filter:  remove the # at the start of that line
+# ═══════════════════════════════════════════════════════════════
+
+
+# ── MACD SETTINGS ───────────────────────────────────────────────
+# These control how MACD is calculated for every stock
+# Change these numbers anytime — script recalculates automatically
+# Default values are the industry standard (12, 26, 9)
+
+macd_fast: 12          # Fast moving average (days) — e.g. 12, 50
+macd_slow: 26          # Slow moving average (days) — e.g. 26, 100
+macd_signal: 9         # Signal line (days)  — e.g. 9, 20
+
+
+# ── VALUATION FILTERS ───────────────────────────────────────────
+# How cheap or expensive is the stock relative to its earnings/assets
+
+pe_max: 30             # P/E ratio must be BELOW this number
+                       # Lower P/E = cheaper stock relative to earnings
+                       # Example: 30 means exclude stocks with P/E above 30
+
+pb_max: 5              # P/B ratio must be BELOW this number
+                       # Lower P/B = cheaper stock relative to book value
+                       # Example: 5 means exclude stocks with P/B above 5
+
+
+# ── QUALITY FILTERS ─────────────────────────────────────────────
+# How well is the company actually run
+
+roe_min: 15            # Return on Equity must be ABOVE this %
+                       # Higher ROE = company generates more profit per rupee of equity
+                       # Example: 15 means only include stocks with ROE above 15%
+
+debt_equity_max: 1.0   # Debt/Equity must be BELOW this number
+                       # Lower D/E = less debt, safer company
+                       # Example: 1.0 means exclude stocks with D/E above 1.0
+
+
+# ── CASH & LIQUIDITY FILTERS ────────────────────────────────────
+# Can the company meet its short term obligations
+
+current_ratio_min: 1.5 # Current Ratio must be ABOVE this number
+                       # Above 1.5 = healthy, below 1.0 = potentially struggling
+                       # Example: 1.5 means only include stocks with ratio above 1.5
+
+
+# ── SIZE FILTERS ────────────────────────────────────────────────
+# Control the size of companies you want to see
+
+# mktcap_min_cr: 10000  # Minimum market cap in Crores (uncomment to enable)
+                        # Example: 10000 means exclude companies below 10,000 Cr
+
+# mktcap_max_cr: 500000 # Maximum market cap in Crores (uncomment to enable)
+                        # Example: 500000 means exclude companies above 5,00,000 Cr
+
+
+# ── SECTOR FILTERS ──────────────────────────────────────────────
+# Control which sectors appear in your filtered list
+# Leave both commented out to include ALL sectors
+
+# sector_exclude:       # Uncomment and list sectors to EXCLUDE
+#   - "Financial Services"
+#   - "Technology"
+#   - "Energy"
+
+# sector_include:       # Uncomment and list sectors to ONLY include
+#   - "Healthcare"
+#   - "Consumer Cyclical"
+#   - "Industrials"
+
+
+# ═══════════════════════════════════════════════════════════════
+#  QUICK REFERENCE — SECTOR NAMES USED BY YAHOO FINANCE
+#  Basic Materials, Communication Services, Consumer Cyclical,
+#  Consumer Defensive, Energy, Financial Services, Healthcare,
+#  Industrials, Real Estate, Technology, Utilities
+# ═══════════════════════════════════════════════════════════════
