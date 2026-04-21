@@ -1,4 +1,4 @@
-# nifty100-stock-screener
+# nifty100-stock-screener (made with cluade)
 Python stock screener for Nifty 100 using technical + fundamental filters
 # Nifty 100 Stock Screener
 
