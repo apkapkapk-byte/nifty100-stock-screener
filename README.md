@@ -42,7 +42,7 @@ python screener.py
 * Excel file with:
 
   * Full List
-  * Filtered List
+  * Filtered List (based on user-defined filters)
 
 ---
 
