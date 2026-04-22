@@ -56,4 +56,4 @@ python screener.py
 
 * Passes unfit stocks to filtered list due to inadequate data availability of those stocks
 * Analyses 93 out of 100 stocks with some errors and blank values, again due to data unavailability
-* limitations due to data source-yahoo finance 
+* limitations due to data source-yahoo finance (cuz its easy and free to use but on the flip side inaccuracy, unavailability of accurate and reliable data etc)
