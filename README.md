@@ -1,5 +1,5 @@
 # nifty100-stock-screener (made with claude)
-Python stock screener for Nifty 100 using technical + fundamental filters
+Python stock screener for Nifty 100 using technical + fundamental indicators 
 # Nifty 100 Stock Screener
 
 A Python-based stock screener that analyzes Nifty 100 stocks using:
