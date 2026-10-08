@@ -15,6 +15,9 @@ macd_fast: 12          # Fast moving average (days) — e.g. 12, 50
 macd_slow: 26          # Slow moving average (days) — e.g. 26, 100
 macd_signal: 9         # Signal line (days)  — e.g. 9, 20
 
+# ── MOVING AVERAGE SETTINGS ─────────────────────────────────────
+sma_period: 200        # 200-day SMA
+
 
 # ── VALUATION FILTERS ───────────────────────────────────────────
 # How cheap or expensive is the stock relative to its earnings/assets
