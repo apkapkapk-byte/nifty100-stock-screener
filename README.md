@@ -4,7 +4,7 @@ Python stock screener for Nifty 100 using technical + fundamental indicators
 
 A Python-based stock screener that analyzes Nifty 100 stocks using:
 
-* Key technical indicators (200W SMA, MACD)
+* Key technical indicators (200 SMA, MACD)
 * Fundamental metrics (P/E, ROE, Debt/Equity, etc.)
 * Custom filters via `config.yaml`
 
