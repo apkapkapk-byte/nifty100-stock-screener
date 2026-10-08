@@ -65,20 +65,20 @@ results = []
 for ticker in TICKERS:
     try:
         stock = yf.Ticker(ticker)
-        
-        # Daily historical data for 200-day SMA
-# Need at least 200 trading days to calculate the SMA correctly.
-hist_daily = stock.history(period="2y", interval="1d")
-if hist_daily.empty or len(hist_daily) < SMA_PERIOD:
-    continue
 
-current_price = hist_daily["Close"].iloc[-1]
-sma_200 = hist_daily["Close"].tail(SMA_PERIOD).mean()
-sma_pct = ((current_price - sma_200) / sma_200) * 100  # % above/below 200-day SMA
+        # Daily historical data for 200-day SMA
+        # Need at least 200 trading days to calculate the SMA correctly.
+        hist_daily = stock.history(period="2y", interval="1d")
+        if hist_daily.empty or len(hist_daily) < SMA_PERIOD:
+            continue
+
+        current_price = hist_daily["Close"].iloc[-1]
+        sma_200 = hist_daily["Close"].tail(SMA_PERIOD).mean()
+        sma_pct = ((current_price - sma_200) / sma_200) * 100  # % above/below 200-day SMA
 
         # ── MACD Calculation ─────────────────────────────────────────────────
         # Uses daily price data — more granular than weekly, needed for MACD accuracy
-        macd_line   = None
+        macd_line = None
         signal_line = None
         macd_signal_label = None
 
