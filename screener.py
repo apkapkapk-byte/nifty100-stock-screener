@@ -16,6 +16,7 @@ with open("config.yaml", "r", encoding="utf-8") as f:
 MACD_FAST   = config.get("macd_fast", 12)
 MACD_SLOW   = config.get("macd_slow", 26)
 MACD_SIGNAL = config.get("macd_signal", 9)
+SMA_PERIOD = config.get("sma_period", 200)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # ─── Auto-fetch Nifty 100 tickers from NSE official CSV ───────────────────────
@@ -65,18 +66,18 @@ for ticker in TICKERS:
     try:
         stock = yf.Ticker(ticker)
         
-        # Weekly historical data for 200W SMA (need ~200 weeks = ~4 years)
-        hist = stock.history(period="5y", interval="1wk")
-        if hist.empty or len(hist) < 50:
-            continue
+        # Daily historical data for 200-day SMA
+# Need at least 200 trading days to calculate the SMA correctly.
+hist_daily = stock.history(period="2y", interval="1d")
+if hist_daily.empty or len(hist_daily) < SMA_PERIOD:
+    continue
 
-        current_price = hist["Close"].iloc[-1]
-        sma_200w = hist["Close"].tail(200).mean()
-        sma_pct = ((current_price - sma_200w) / sma_200w) * 100  # % above/below SMA
+current_price = hist_daily["Close"].iloc[-1]
+sma_200 = hist_daily["Close"].tail(SMA_PERIOD).mean()
+sma_pct = ((current_price - sma_200) / sma_200) * 100  # % above/below 200-day SMA
 
         # ── MACD Calculation ─────────────────────────────────────────────────
         # Uses daily price data — more granular than weekly, needed for MACD accuracy
-        hist_daily = stock.history(period="1y", interval="1d")
         macd_line   = None
         signal_line = None
         macd_signal_label = None
@@ -130,7 +131,7 @@ for ticker in TICKERS:
             "Name":                name,
             "Sector":              sector,
             "Price (₹)":           round(current_price, 2),
-            "200W SMA (₹)":        round(sma_200w, 2),
+            "200D SMA (₹)": round(sma_200, 2),
             "SMA % (above/below)": round(sma_pct, 2),
             "MACD Line":           macd_line,
             "Signal Line":         signal_line,
@@ -229,7 +230,7 @@ with pd.ExcelWriter(filename, engine="openpyxl") as writer:
     df.to_excel(writer, sheet_name="Full List", index=True)
     ws1 = writer.sheets["Full List"]
     ws1.insert_rows(1)
-    ws1["A1"] = f"Full List — Nifty 100 | Run: {datetime.now().strftime('%d %b %Y, %I:%M %p')} | Ranked by 200W SMA — most underperforming first"
+    ws1["A1"] = f"Full List - Nifty 100 | Run: {datetime.now().strftime('%d %b %Y, %I:%M %p')} | Ranked by 200D SMA - most underperforming first"
     for col in ws1.columns:
         max_len = max(len(str(cell.value)) if cell.value else 0 for cell in col) + 3
         ws1.column_dimensions[col[0].column_letter].width = min(max_len, 30)
